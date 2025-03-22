@@ -1,0 +1,128 @@
+{
+  "name": "flag-deprecated-files",
+  "displayName": "Flag Deprecated Files",
+  "description": "A tool to visually distinguish how files that are deprecated appear in the file explorer view.",
+  "version": "0.0.1",
+  "publisher": "williamcallahan",
+  "private": false,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/williamagh/vscode-flag-deprecated-files"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "deprecated",
+    "files",
+    "decoration",
+    "file explorer"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "flag-deprecated-files.scanWorkspace",
+        "title": "Flag Deprecated Files: Scan Workspace"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "flag-deprecated-files.scanWorkspace",
+          "when": "workbenchState != empty"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "flag-deprecated-files.scanWorkspace",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Flag Deprecated Files",
+      "properties": {
+        "flagDeprecatedFiles.excludedDirectories": {
+          "type": "array",
+          "default": ["node_modules"],
+          "description": "Directories to exclude from deprecated file scanning"
+        },
+        "flagDeprecatedFiles.decorations.badge": {
+          "type": "string",
+          "default": "⊘",
+          "description": "Badge character to show on deprecated files"
+        },
+        "flagDeprecatedFiles.decorations.color": {
+          "type": "string",
+          "enum": ["amber", "gray", "custom"],
+          "default": "amber",
+          "description": "Color theme for deprecated files"
+        },
+        "flagDeprecatedFiles.decorations.customColor": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#d4a72c",
+          "description": "Custom color for deprecated files (when color is set to 'custom')"
+        },
+        "flagDeprecatedFiles.scanOnStartup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to scan for deprecated files on startup"
+        }
+      }
+    },
+    "colors": [
+      {
+        "id": "deprecated.files.subtle",
+        "description": "Color for deprecated files (subtle)",
+        "defaults": {
+          "dark": "#d4a72c",
+          "light": "#b38600",
+          "highContrast": "#b38600",
+          "highContrastLight": "#b38600"
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.90.0",
+    "@typescript-eslint/eslint-plugin": "^8.25.0",
+    "@typescript-eslint/parser": "^8.25.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "esbuild": "^0.25.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-deprecation": "^2.0.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.7.3"
+  }
+}
