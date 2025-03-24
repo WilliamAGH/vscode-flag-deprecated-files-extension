@@ -23,8 +23,10 @@ class DeprecatedFilesDecorationProvider implements vscode.FileDecorationProvider
 	private deprecatedFiles: Set<string> = new Set();
 	private deprecatedFolderCounts: Map<string, number> = new Map();
 	private config: DeprecatedFilesConfig;
+	private context: vscode.ExtensionContext;
 
-	constructor() {
+	constructor(context: vscode.ExtensionContext) {
+		this.context = context;
 		this.config = this.getConfig();
 		// Listen for configuration changes
 		vscode.workspace.onDidChangeConfiguration(e => {
@@ -33,6 +35,9 @@ class DeprecatedFilesDecorationProvider implements vscode.FileDecorationProvider
 				this.updateDecorations();
 			}
 		});
+		// Load cached deprecated files on startup
+		const cached = this.context.globalState.get<string[]>('deprecatedFiles', []);
+		this.deprecatedFiles = new Set(cached);
 	}
 
 	private getConfig(): DeprecatedFilesConfig {
@@ -89,6 +94,8 @@ class DeprecatedFilesDecorationProvider implements vscode.FileDecorationProvider
 			}
 		}
 		this.updateDecorations();
+		// Save to cache whenever we update deprecated files
+		await this.saveToCache();
 	}
 
 	private updateFolderCount(filePath: string) {
@@ -198,12 +205,18 @@ class DeprecatedFilesDecorationProvider implements vscode.FileDecorationProvider
 		this.deprecatedFolderCounts.clear();
 		await this.updateDeprecatedFiles();
 	}
+
+	// Save to cache whenever we update deprecated files
+	private async saveToCache() {
+		await this.context.globalState.update('deprecatedFiles', 
+			Array.from(this.deprecatedFiles));
+	}
 }
 
 // This method is called when your extension is activated
 export async function activate(context: vscode.ExtensionContext) {
 	// Create and register the decoration provider
-	const decorationProvider = new DeprecatedFilesDecorationProvider();
+	const decorationProvider = new DeprecatedFilesDecorationProvider(context);
 	const decorationRegistration = vscode.window.registerFileDecorationProvider(decorationProvider);
 
 	// Register the command to scan workspace

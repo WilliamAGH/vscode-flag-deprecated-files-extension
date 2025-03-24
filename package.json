@@ -2,7 +2,7 @@
   "name": "flag-deprecated-files",
   "displayName": "Flag Deprecated Files",
   "description": "A tool to visually distinguish how files that are deprecated appear in the file explorer view.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "williamcallahan",
   "private": false,
   "license": "MIT",
@@ -57,7 +57,9 @@
       "properties": {
         "flagDeprecatedFiles.excludedDirectories": {
           "type": "array",
-          "default": ["node_modules"],
+          "default": [
+            "node_modules"
+          ],
           "description": "Directories to exclude from deprecated file scanning"
         },
         "flagDeprecatedFiles.decorations.badge": {
@@ -67,7 +69,11 @@
         },
         "flagDeprecatedFiles.decorations.color": {
           "type": "string",
-          "enum": ["amber", "gray", "custom"],
+          "enum": [
+            "amber",
+            "gray",
+            "custom"
+          ],
           "default": "amber",
           "description": "Color theme for deprecated files"
         },
@@ -81,6 +87,11 @@
           "type": "boolean",
           "default": true,
           "description": "Whether to scan for deprecated files on startup"
+        },
+        "flagDeprecatedFiles.maxLinesToScan": {
+          "type": "number",
+          "default": 12,
+          "description": "Maximum number of lines to scan for @deprecated tag in each file"
         }
       }
     },
@@ -109,7 +120,10 @@
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "vsce-package": "vsce package",
+    "vsce-publish": "vsce publish",
+    "release": "npm-run-all -s check-types compile package vsce-package"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -119,6 +133,7 @@
     "@typescript-eslint/parser": "^8.25.0",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1",
+    "@vscode/vsce": "^2.24.0",
     "esbuild": "^0.25.1",
     "eslint": "^8.57.0",
     "eslint-plugin-deprecation": "^2.0.0",
