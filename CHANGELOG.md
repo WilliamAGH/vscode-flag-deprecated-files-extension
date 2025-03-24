@@ -1,10 +1,16 @@
 # Change Log
 
-## [v0.0.4]
+## [v0.0.5]
 
-March 24, 2025
+March 25, 2025
 
 - Added icon and screenshot to README for release on the [Microsoft Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=WilliamCallahan.flag-deprecated-files) and the [Open VSX Registry](https://open-vsx.org/extension/williamcallahan/flag-deprecated-files)
+
+## [v0.0.4]
+
+March 25, 2025
+
+- Added screenshot
 
 ## [v0.0.3]
 
