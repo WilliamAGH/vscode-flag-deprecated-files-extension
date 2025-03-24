@@ -51,11 +51,16 @@ class DeprecatedFilesDecorationProvider implements vscode.FileDecorationProvider
 
 	async checkSingleFile(uri: vscode.Uri): Promise<boolean> {
 		try {
+			// Use VSCode's built-in API for reading partial file content
 			const document = await vscode.workspace.openTextDocument(uri);
-			const text = document.getText();
-			// Only check the first N lines for the @deprecated tag
-			const lines = text.split('\n').slice(0, this.config.maxLinesToScan);
-			return lines.some(line => line.includes('@deprecated'));
+			// Only read up to maxLinesToScan lines
+			for (let i = 0; i < Math.min(document.lineCount, this.config.maxLinesToScan); i++) {
+				const line = document.lineAt(i).text;
+				if (line.includes('@deprecated')) {
+					return true;
+				}
+			}
+			return false;
 		} catch (error) {
 			console.error(`Error processing file ${uri.fsPath}:`, error);
 			return false;
