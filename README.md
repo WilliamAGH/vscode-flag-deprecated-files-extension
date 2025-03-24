@@ -1,6 +1,14 @@
 # Flag Deprecated Files
 
-A Visual Studio Code extension that visually distinguishes deprecated files in the file explorer view. Files marked with the JSDoc or JavaDoc `@deprecated` tag will be highlighted with a subtle badge and color in both the file explorer and a dedicated "Deprecated Files" view.
+A Visual Studio Code extension that visually distinguishes deprecated files in the file explorer view. Files marked with the JSDoc or JavaDoc `@deprecated` tag will be highlighted with a subtle badge and color in both the file explorer and a dedicated "Deprecated Files" view. It's pretty basic at the moment, but it gets the job done! Feel free to view the code on [GitHub](https://github.com/WilliamAGH/vscode-flag-deprecated-files-extension) and submit feature requests or PRs.
+
+[![Visual Studio Marketplace](https://img.shields.io/badge/Marketplace-Flag%20Deprecated%20Files-blue.svg)](https://marketplace.visualstudio.com/items?itemName=WilliamCallahan.flag-deprecated-files)
+
+## Screenshot
+
+![Example of deprecated files in VS Code](https://raw.githubusercontent.com/WilliamAGH/vscode-flag-deprecated-files-extension/main/src/resources/example-of-deprecation-flag-in-vscode.png)
+
+_The screenshot above shows how deprecated files are flagged in the file explorer view in Visual Studio Code, Cursor, Windstream, and other VS Code forks._
 
 ## Features
 
@@ -9,7 +17,7 @@ A Visual Studio Code extension that visually distinguishes deprecated files in t
 - Displays count of deprecated files in folders
 - Provides a dedicated "Deprecated Files" view for easy tracking
 - Uses a muted amber/gold color scheme to indicate deprecation (customizable)
-- Supports JavaScript, TypeScript, Java, Python, and Markdown files
+- Supports JavaScript, TypeScript, Java, Python, and Markdown files currently
 - Real-time updates when files are modified
 - Configurable directory exclusions and decoration styles
 - Lightweight and performant - only scans when needed
@@ -24,25 +32,25 @@ A Visual Studio Code extension that visually distinguishes deprecated files in t
 5. Check the "Deprecated Files" view in the explorer sidebar for a dedicated list
 
 Example of a deprecated file:
+
 ```javascript
 /**
  * @deprecated This file is deprecated and will be removed in the next version
  */
-console.log('This file is deprecated');
 ```
 
 ## Configuration
 
-You can customize the extension through VS Code settings. Add these to your `.vscode/settings.json`:
+You can customize the extension through VS Code settings. Add any of these examples to your `.vscode/settings.json` for your project:
 
 ```json
 {
-    "flagDeprecatedFiles.excludedDirectories": ["node_modules", "dist", "build"],
-    "flagDeprecatedFiles.decorations.badge": "⊘",
-    "flagDeprecatedFiles.decorations.color": "amber",
-    "flagDeprecatedFiles.decorations.customColor": "#d4a72c",
-    "flagDeprecatedFiles.scanOnStartup": true,
-    "flagDeprecatedFiles.maxLinesToScan": 12
+  "flagDeprecatedFiles.excludedDirectories": ["node_modules", "dist", "build"],
+  "flagDeprecatedFiles.decorations.badge": "⊘",
+  "flagDeprecatedFiles.decorations.color": "amber",
+  "flagDeprecatedFiles.decorations.customColor": "#d4a72c",
+  "flagDeprecatedFiles.scanOnStartup": true,
+  "flagDeprecatedFiles.maxLinesToScan": 12
 }
 ```
 
@@ -62,11 +70,13 @@ You can customize the extension through VS Code settings. Add these to your `.vs
 ## Known Limitations
 
 1. **File Scanning**:
+
    - Only scans the first N lines of each file for @deprecated tag (configurable)
    - Limited to specific file types: .js, .ts, .jsx, .tsx, .java, .py, .md, .mdx
    - Simple text search for "@deprecated" tag (no AST parsing)
 
 2. **Decorations**:
+
    - Badge overlay is limited to a single character (VS Code API limitation)
    - Cannot modify the file type icon directly (VS Code API limitation)
    - Color applies to the entire filename (cannot color specific parts)
@@ -78,21 +88,14 @@ You can customize the extension through VS Code settings. Add these to your `.vs
 
 ## Release Notes
 
-### 1.1.0
+See the [CHANGELOG.md](./CHANGELOG.md) for release notes and version history.
 
-Added folder support and performance improvements:
-- Shows count of deprecated files in folders
-- Configurable maximum lines to scan for @deprecated tag
-- Improved performance by limiting scan to file headers
-- Better handling of file system events
+## Feature Requests
 
-### 1.0.0
+I wrote this plugin to easily flag which files are deprecated in a few large repositories of my own. If you have any feature requests, feel free to reach out to me on [X / Twitter](https://x.com/williamcallahan) or open an issue or pull request on [GitHub](https://github.com/WilliamAGH/vscode-flag-deprecated-files-extension).
 
-Initial release:
-- Dual-view system: File Explorer decorations and dedicated Deprecated Files view
-- Configurable badge and color schemes
-- Performance optimizations for file scanning
-- Real-time updates with file watcher
-- Comprehensive configuration options
+## About the Author
+
+When I'm not working on my day job of building a [venture capital research tool](https://aventure.vc), I'm tinkering with fun things like this! Learn more about me at [williamcallahan.com](https://williamcallahan.com).
 
 **Enjoy!**

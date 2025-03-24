@@ -1,6 +1,20 @@
 # Change Log
 
-## [First Release: v0.0.2]
+## [v0.0.4]
+
+March 24, 2025
+
+- Added icon and screenshot to README for release on the [Microsoft Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=WilliamCallahan.flag-deprecated-files) and the [Open VSX Registry](https://open-vsx.org/extension/williamcallahan/flag-deprecated-files)
+
+## [v0.0.3]
+
+March 24, 2025
+
+- First public release on [Microsoft Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=WilliamCallahan.flag-deprecated-files)
+- Includes general housekeeping code cleanup
+
+## [v0.0.2]
+
 March 24, 2025
 
 - Improved file scanning performance with early termination and partial content reading
@@ -9,7 +23,8 @@ March 24, 2025
 - Implemented file processing batching to prevent UI freezing
 - Added persistent caching using VSCode's storage API
 
-## [First Release: v0.0.1]
+## [v0.0.1]
+
 March 21, 2025
 
 - Initial alpha release
