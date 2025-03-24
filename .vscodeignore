@@ -13,6 +13,3 @@ vsc-extension-quickstart.md
 **/*.ts
 **/.vscode-test.*
 **/*.svg
-archived/**
-src_cleanup/**
-backup_before_reorg/**
