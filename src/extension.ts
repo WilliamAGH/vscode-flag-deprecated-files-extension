@@ -82,20 +82,23 @@ class DeprecatedFilesDecorationProvider implements vscode.FileDecorationProvider
 			`{${this.config.excludedDirectories.map(dir => `**/${dir}/**`).join(',')}}`
 		);
 
-		// Clear previous state
-		this.deprecatedFiles.clear();
-		this.deprecatedFolderCounts.clear();
-
-		// Process files and update folder counts
-		for (const file of files) {
-			if (await this.checkSingleFile(file)) {
-				this.deprecatedFiles.add(file.fsPath);
-				this.updateFolderCount(file.fsPath);
-			}
+		const BATCH_SIZE = 20; // Process 20 files at a time
+		
+		for (let i = 0; i < files.length; i += BATCH_SIZE) {
+			const batch = files.slice(i, i + BATCH_SIZE);
+			await Promise.all(batch.map(async file => {
+				if (await this.checkSingleFile(file)) {
+					this.deprecatedFiles.add(file.fsPath);
+					this.updateFolderCount(file.fsPath);
+				}
+			}));
+			
+			// Update UI every batch
+			this.updateDecorations();
+			
+			// Let other VS Code operations happen
+			await new Promise(resolve => setTimeout(resolve, 10));
 		}
-		this.updateDecorations();
-		// Save to cache whenever we update deprecated files
-		await this.saveToCache();
 	}
 
 	private updateFolderCount(filePath: string) {
