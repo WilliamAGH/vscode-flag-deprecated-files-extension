@@ -28,8 +28,8 @@ class DeprecatedFilesDecorationProvider implements vscode.FileDecorationProvider
 	constructor(context: vscode.ExtensionContext) {
 		this.context = context;
 		this.config = this.getConfig();
-		// Listen for configuration changes
-		vscode.workspace.onDidChangeConfiguration(e => {
+	// Listen for configuration changes
+	vscode.workspace.onDidChangeConfiguration((e: vscode.ConfigurationChangeEvent) => {
 			if (e.affectsConfiguration('flagDeprecatedFiles')) {
 				this.config = this.getConfig();
 				this.updateDecorations();
@@ -92,7 +92,7 @@ class DeprecatedFilesDecorationProvider implements vscode.FileDecorationProvider
 		
 		for (let i = 0; i < files.length; i += BATCH_SIZE) {
 			const batch = files.slice(i, i + BATCH_SIZE);
-			await Promise.all(batch.map(async file => {
+			await Promise.all(batch.map(async (file: vscode.Uri) => {
 				if (await this.checkSingleFile(file)) {
 					this.deprecatedFiles.add(file.fsPath);
 					this.updateFolderCount(file.fsPath);
@@ -241,9 +241,9 @@ export async function activate(context: vscode.ExtensionContext) {
 		false
 	);
 
-	watcher.onDidChange(uri => decorationProvider.handleFileChange(uri));
-	watcher.onDidCreate(uri => decorationProvider.handleFileCreate(uri));
-	watcher.onDidDelete(uri => decorationProvider.handleFileDelete(uri));
+	watcher.onDidChange((uri: vscode.Uri) => decorationProvider.handleFileChange(uri));
+	watcher.onDidCreate((uri: vscode.Uri) => decorationProvider.handleFileCreate(uri));
+	watcher.onDidDelete((uri: vscode.Uri) => decorationProvider.handleFileDelete(uri));
 
 	// Initial scan if enabled
 	const config = vscode.workspace.getConfiguration('flagDeprecatedFiles');

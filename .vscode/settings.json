@@ -1,1 +1,14 @@
-{}
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "eslint.validate": ["typescript", "javascript"],
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "eslint.options": {
+    "overrideConfigFile": "./tsconfig.json"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
