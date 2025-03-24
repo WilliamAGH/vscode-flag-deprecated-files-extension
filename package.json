@@ -1,8 +1,8 @@
 {
   "name": "flag-deprecated-files",
   "displayName": "Flag Deprecated Files",
-  "description": "A tool to visually distinguish how files that are deprecated appear in the file explorer view.",
-  "version": "0.0.5",
+  "description": "A tool to instantly see which files are deprecated in VS Code's File Explorer view without needing to open the file.",
+  "version": "0.0.6",
   "publisher": "williamcallahan",
   "private": false,
   "license": "MIT",

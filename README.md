@@ -10,6 +10,8 @@ A Visual Studio Code extension that visually distinguishes deprecated files in t
 
 _The screenshot above shows how deprecated files are flagged in the file explorer view in Visual Studio Code, Cursor, Windstream, and other VS Code forks._
 
+It's a safe, simple, open source tool. If you'd like to see its code before installing, it's [available here](https://github.com/WilliamAGH/vscode-flag-deprecated-files-extension/blob/main/src/extension.ts)
+
 ## Features
 
 - Automatically detects files containing `@deprecated` JSDoc or JavaDoc tags
