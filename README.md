@@ -6,12 +6,14 @@ A Visual Studio Code extension that visually distinguishes deprecated files in t
 
 - Automatically detects files containing `@deprecated` JSDoc or JavaDoc tags
 - Shows subtle badge overlay (⊘) next to deprecated files in the file explorer
+- Displays count of deprecated files in folders
 - Provides a dedicated "Deprecated Files" view for easy tracking
 - Uses a muted amber/gold color scheme to indicate deprecation (customizable)
 - Supports JavaScript, TypeScript, Java, Python, and Markdown files
 - Real-time updates when files are modified
 - Configurable directory exclusions and decoration styles
 - Lightweight and performant - only scans when needed
+- Smart scanning that only checks the first N lines of each file for better performance
 
 ## Usage
 
@@ -39,7 +41,8 @@ You can customize the extension through VS Code settings. Add these to your `.vs
     "flagDeprecatedFiles.decorations.badge": "⊘",
     "flagDeprecatedFiles.decorations.color": "amber",
     "flagDeprecatedFiles.decorations.customColor": "#d4a72c",
-    "flagDeprecatedFiles.scanOnStartup": true
+    "flagDeprecatedFiles.scanOnStartup": true,
+    "flagDeprecatedFiles.maxLinesToScan": 12
 }
 ```
 
@@ -50,6 +53,7 @@ You can customize the extension through VS Code settings. Add these to your `.vs
 - `decorations.color`: Color theme for deprecated files (options: `"amber"`, `"gray"`, `"custom"`)
 - `decorations.customColor`: Custom color in hex format when using `"custom"` color
 - `scanOnStartup`: Whether to scan for deprecated files when VS Code starts (default: `true`)
+- `maxLinesToScan`: Maximum number of lines to scan for @deprecated tag in each file (default: `12`)
 
 ## Requirements
 
@@ -58,7 +62,7 @@ You can customize the extension through VS Code settings. Add these to your `.vs
 ## Known Limitations
 
 1. **File Scanning**:
-   - Only scans root-level files by default for performance
+   - Only scans the first N lines of each file for @deprecated tag (configurable)
    - Limited to specific file types: .js, .ts, .jsx, .tsx, .java, .py, .md, .mdx
    - Simple text search for "@deprecated" tag (no AST parsing)
 
@@ -73,6 +77,14 @@ You can customize the extension through VS Code settings. Add these to your `.vs
    - File watcher only monitors root-level files for changes
 
 ## Release Notes
+
+### 1.1.0
+
+Added folder support and performance improvements:
+- Shows count of deprecated files in folders
+- Configurable maximum lines to scan for @deprecated tag
+- Improved performance by limiting scan to file headers
+- Better handling of file system events
 
 ### 1.0.0
 
