@@ -1,10 +1,14 @@
 # Change Log
 
+## [v0.0.6]
+
+- Changed icon for app in VSCode Marketplace
+
 ## [v0.0.5]
 
 March 25, 2025
 
-- Added icon and screenshot to README for release on the [Microsoft Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=WilliamCallahan.flag-deprecated-files) and the [Open VSX Registry](https://open-vsx.org/extension/williamcallahan/flag-deprecated-files)
+- Added screenshot to README for release on the [Microsoft Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=WilliamCallahan.flag-deprecated-files) and the [Open VSX Registry](https://open-vsx.org/extension/williamcallahan/flag-deprecated-files)
 
 ## [v0.0.4]
 
