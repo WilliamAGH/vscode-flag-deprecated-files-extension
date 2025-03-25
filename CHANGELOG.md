@@ -1,8 +1,12 @@
 # Change Log
 
+## [v0.0.7]
+
+- Updated to icon to Mr. Smiley
+
 ## [v0.0.6]
 
-- Changed icon for app in VSCode Marketplace
+- Added better context screenshot of usage in README
 
 ## [v0.0.5]
 
