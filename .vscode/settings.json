@@ -10,5 +10,10 @@
   "eslint.options": {
     "overrideConfigFile": "./tsconfig.json"
   },
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#0e2234",
+    "titleBar.activeBackground": "#263a37",
+    "titleBar.activeForeground": "#FAFAFD"
+  }
 }
